@@ -16,11 +16,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-/*
-|--------------------------------------------------------------------------
-| PRE SAVE HOOK (Async Style - NO next())
-|--------------------------------------------------------------------------
-*/
+
 userSchema.pre('save', async function () {
   if (!this.isModified('password')) return;
 
@@ -28,20 +24,12 @@ userSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-/*
-|--------------------------------------------------------------------------
-| INSTANCE METHODS
-|--------------------------------------------------------------------------
-*/
+
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
 };
 
-/*
-|--------------------------------------------------------------------------
-| STATIC METHODS (Business Logic Layer)
-|--------------------------------------------------------------------------
-*/
+
 
 userSchema.statics.registerUser = async function (username, email, password) {
   if (!username || !email || !password) {
