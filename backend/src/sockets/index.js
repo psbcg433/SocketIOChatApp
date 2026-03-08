@@ -3,6 +3,7 @@ import { createAdapter } from '@socket.io/redis-adapter';
 import redis from '../config/redis.js';
 import { authenticateSocket } from './middlewares/socketAuth.js';
 import { setupPresence } from './handlers/presenceHandler.js';
+import { setupChat } from './handlers/chatHandler.js';
 
 export const initSockets = (httpServer) => {
   const io = new Server(httpServer, {
@@ -11,7 +12,7 @@ export const initSockets = (httpServer) => {
       methods: ['GET', 'POST'],
       credentials: true,
     },
-    pingTimeout: 60000, 
+    pingTimeout: 60000,
   });
 
 
@@ -19,13 +20,15 @@ export const initSockets = (httpServer) => {
   const subClient = redis.duplicate();
   io.adapter(createAdapter(pubClient, subClient));
 
-  
+
   io.use(authenticateSocket);
 
 
   io.on('connection', (socket) => {
     console.log(`🔌 Connected: User ${socket.userId} (socket ${socket.id})`);
-    setupPresence(io, socket); 
+    setupPresence(io, socket);
+    setupPresence(io, socket);
+    setupChat(io, socket);
 
     socket.on('disconnect', () => {
       console.log(`🔌 Disconnected: User ${socket.userId}`);

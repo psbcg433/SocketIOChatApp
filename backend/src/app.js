@@ -4,6 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import authRoutes from "./routes/authRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
@@ -20,6 +21,8 @@ app.use(cors({
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/chat", chatRoutes);
 app.use(errorHandler);
 
 export default app;
