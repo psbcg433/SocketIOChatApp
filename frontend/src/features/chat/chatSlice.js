@@ -1,5 +1,3 @@
-// src/features/chat/chatSlice.js
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -16,7 +14,6 @@ const chatSlice = createSlice({
       state.messages[conversationId] = [...(state.messages[conversationId] || []), message];
     },
     messageReceived: (state, action) => {
-      // same as messageSent for now - or customize if needed
       const { conversationId, message } = action.payload;
       state.messages[conversationId] = [...(state.messages[conversationId] || []), message];
     },
@@ -35,7 +32,7 @@ const chatSlice = createSlice({
   },
 });
 
-// Export the actions as named exports (this is what useChat.js needs)
+
 export const { 
   messageSent, 
   messageReceived, 
@@ -43,5 +40,5 @@ export const {
   typingStop 
 } = chatSlice.actions;
 
-// Export the reducer as default (already there for store)
+
 export default chatSlice.reducer;
