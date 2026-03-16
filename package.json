@@ -1,0 +1,17 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Learning distributed systems with socket io and MERN stack",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "build:client": "npm run build --prefix client",
+    "lint": "npm run lint --prefix server && npm run lint --prefix client"
+  },
+   "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

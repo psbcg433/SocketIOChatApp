@@ -1,1 +1,1 @@
-learning Socket IO
+A practice project to learn socket IO with MERN Stack
